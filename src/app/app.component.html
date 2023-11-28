@@ -1,0 +1,62 @@
+<div class="container">
+  <h1 style="text-align: center;">{{ title }}</h1>
+
+  <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
+    <!-- USERNAME -->
+    <div class="mb-3">
+      <label for="username">Username</label>
+      <br>
+      <input class="form-control" type="text" name="username" required minlength="3" maxlength="20" pattern="[a-zA-Z]+"
+        [(ngModel)]="user.username" #username="ngModel" placeholder="enter your username">
+      <div class="text-danger" *ngIf="username.invalid && (username.dirty || username.touched)">Invalid Username</div>
+    </div>
+    <!-- E-MAIL -->
+    <div class="mb-3">
+      <label class="form-label" for="email">Email</label>
+      <br>
+      <input class="form-control" type="email" name="email" required [(ngModel)]="user.email" #email="ngModel"
+        placeholder="enter your mail">
+      <div class="text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">Invalid Email</div>
+    </div>
+    <!-- ADDRESS -->
+    <div class="mb-3">
+      <label for="address">Address</label>
+      <br>
+      <input class="form-control" type="address" name="address" required [(ngModel)]="user.address" #address="ngModel"
+        placeholder="enter your address">
+      <div class="text-danger" *ngIf="address.invalid && (address.dirty || address.touched)">Address is required</div>
+    </div>
+    <!-- DATE OF BIRTH -->
+    <div class="mb-3">
+      <label for="dob">Date of Birth</label>
+      <br>
+      <input class="form-control" type="text" id="dob" name="dob" required
+        pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$" placeholder="dd/mm/yyyy" [(ngModel)]="user.dob"
+        #dob="ngModel">
+      <div class="text-danger" *ngIf="dob.invalid && (dob.dirty || dob.touched)">
+        Invalid Date of Birth. Please enter a valid date in dd/mm/yyyy format.
+      </div>
+    </div>
+    <!-- MOBILE NUMBER -->
+    <div class="mb-3">
+      <label for="phoneNumber">Mobile Number</label>
+      <br>
+      <input class="form-control" type="text" id="phoneNumber" name="phoneNumber" required pattern="^[0-9]{10}$"
+        [(ngModel)]="user.phoneNumber" #phoneNumber="ngModel" placeholder="enter your mobile number">
+      <div class="text-danger" *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+        Invalid Mobile Number. It must be a 10-digit number.
+      </div>
+    </div>
+    <!-- PASSWORD -->
+    <div class="mb-3">
+      <label for="password">Password</label>
+      <br>
+      <input class="form-control" type="password" id="password" name="password" required minlength="8" maxlength="20"
+        [(ngModel)]="user.password" #password="ngModel"
+        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$" placeholder="enter your password">
+      <div class="text-danger" *ngIf="password.invalid && (password.dirty || password.touched)">Invalid Password</div>
+    </div>
+    <!-- SAVE BUTTON -->
+    <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Save</button>
+  </form>
+</div>
